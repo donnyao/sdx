@@ -9,6 +9,5 @@
     ios_config:
       backup: yes
       backup_options:
-        filename: test_backup{{ inventory_hostname }}.cfg
-        dir_path: /root/sdx/noj2
-      register: output
+        filename: backup_{{ inventory_hostname }}.cfg
+        dir_path: /root/sdx/day2

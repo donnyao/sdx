@@ -7,6 +7,5 @@
   tasks:
   - name: restore backup
     ios_config:
-      src: test_backup{{ inventory_hostname }}.cfg
+      src: ./backup_{{ inventory_hostname }}.cfg
       replace: config
-    register: output
