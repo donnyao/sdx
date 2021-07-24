@@ -1,0 +1,12 @@
+---
+- name: test restore
+  hosts: all
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+  - name: restore backup
+    ios_config:
+      src: test_backup{{ inventory_hostname }}.cfg
+      replace: config
+    register: output
