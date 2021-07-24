@@ -4,10 +4,13 @@
   gather_facts: false
   connection: network_cli
 
+  vars:
+    time: "{{ lookup('pipe', 'date +\"%Y%m%d\"') }}"
+
   tasks:
   - name: configurable backup path
     ios_config:
       backup: yes
       backup_options:
-        filename: backup_{{ inventory_hostname }}.cfg
-        dir_path: /root/sdx/day2
+        filename: backup_{{ inventory_hostname }}_{{ time }}.cfg
+        dir_path: /root/sdx/day2/backup

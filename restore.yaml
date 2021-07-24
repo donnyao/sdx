@@ -4,8 +4,11 @@
   gather_facts: false
   connection: network_cli
 
+  vars:
+    time: "{{ lookup('pipe', 'date +\"%Y%m%d\"') }}"
+
   tasks:
   - name: restore backup
     ios_config:
-      src: ./backup_{{ inventory_hostname }}.cfg
+      src: backup/backup_{{ inventory_hostname }}_{{ time }}.cfg
       replace: config
