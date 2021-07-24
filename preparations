@@ -1,0 +1,52 @@
+#download cisco images
+#install ciscoc7200
+
+#setup ansible machine
+nano /etc/ansible/ansible.cfg
+```
+inventory= <ansible_dir>
+host_key_checking=False
+```
+
+#setup for ansible_host
+#r1
+conf t
+hostname r1
+ip domain-name 8.8.8.8
+int f1/0
+ip add 1.1.1.1 255.255.255.0
+no sh
+exit
+
+username cisco secret cisco
+username cisco priv 15
+line vty 0 4
+transport input ssh
+login local
+exit
+crypto key generate rsa
+1024
+wr
+
+#r2
+conf t
+hostname r2
+ip domain-name 8.8.8.8
+int f1/0
+ip add 1.1.1.2 255.255.255.0
+no sh
+exit
+
+username cisco secret cisco
+username cisco priv 15
+line vty 0 4
+transport input ssh
+login local
+exit
+crypto key generate rsa
+1024
+wr
+
+
+#cheking connection:
+ansible routers -m ios_command -a "commands='show ip int brief'"
