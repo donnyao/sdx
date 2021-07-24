@@ -12,5 +12,5 @@
     ios_config:
       backup: yes
       backup_options:
-        filename: backup_{{ inventory_hostname }}_{{ time }}.cfg
+        filename: backup_{{ inventory_hostname }}_{{ time }}.j2
         dir_path: /root/sdx/day2/backup

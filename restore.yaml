@@ -10,5 +10,4 @@
   tasks:
   - name: restore backup
     ios_config:
-      src: backup/backup_{{ inventory_hostname }}_{{ time }}.cfg
-      replace: config
+      src: backup/backup_{{ inventory_hostname }}_{{ time }}.j2

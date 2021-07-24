@@ -49,4 +49,4 @@ wr
 
 
 #cheking connection:
-ansible routers -m ios_command -a "commands='show ip int brief'"
+ansible all -m ios_command -a "commands='show ip int brief'"
