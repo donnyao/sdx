@@ -1,0 +1,49 @@
+---
+- name: IP Configuration
+  hosts: all
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+  - name: add ip address on main interface
+    ios_config:
+      authorize: yes
+      parents: "int f0/0"
+      lines:
+          - ip add {{ INT_MAIN }} {{ NET_MASK }}
+          - no sh
+  - name: add ip address on sec interface
+    ios_config:
+      authorize: yes
+      parents: "int f0/1"
+      lines:
+          - ip add {{ INT_SEC }} {{ NET_MASK }}
+          - no sh
+
+- name: OSPF Configuration
+  hosts: R1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+  - name: OSPF Configuration on {{ inventory_hostname }}
+    ios_config:
+      authorize: yes
+      parents: "router ospf 10"
+      lines:
+          - net {{ NET_MAIN }} {{ WILD_MASK }} area 0
+          - net {{ NET_SEC }} {{ WILD_MASK }} area 0
+
+- name: OSPF Configuration
+  hosts: R2
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+  - name: OSPF Configuration on {{ inventory_hostname }}
+    ios_config:
+      authorize: yes
+      parents: "router ospf 10"
+      lines:
+          - net {{ NET_MAIN }} {{ WILD_MASK }} area 0
+          - net {{ NET_SEC }} {{ WILD_MASK }} area 0

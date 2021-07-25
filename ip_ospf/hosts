@@ -1,0 +1,26 @@
+[R1]
+r1 ansible_host=1.1.1.1
+[R1:vars]
+INT_MAIN=10.10.10.1
+NET_MAIN=10.10.10.0
+INT_SEC=192.168.10.1
+NET_SEC=192.168.10.0
+NET_MASK=255.255.255.0
+WILD_MASK=0.0.0.255
+
+[R2]
+r2 ansible_host=1.1.1.2
+[R2:vars]
+INT_MAIN=10.10.10.2
+NET_MAIN=10.10.10.0
+INT_SEC=192.168.20.1
+NET_SEC=192.168.20.0
+NET_MASK=255.255.255.0
+WILD_MASK=0.0.0.255
+
+[all:vars]
+ansible_user=cisco
+ansible_password=cisco
+ansible_become=yes
+ansible_network_os=ios
+ansible_connection=network_cli
